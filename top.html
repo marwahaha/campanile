@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery.min.js"></script>
+</head>
+<body style="margin:0px; padding-0px;white-space:0px">
+	<button style="position:fixed;" onclick="document.location.href = 'index.html'">Back to main</button>
+	<style>
+	img {
+		margin-top:-4px;
+	}
+	</style>
+  <div id="explanation" style="position:fixed; margin-left:80%; border: 4px solid;
+    border-radius: 10px;padding:10px; background-color:rgba(0,0,0,0.7); font-weight:900; color:#eeeeff; text-align:center;">Scroll and click to explore!</div>
+<img id="curimg" onclick="imgclick()" style=" width:150%; cursor:pointer" src="topimg/Inside Front.jpeg"/>
+</body>
+<script>
+	var oldtop = 0;
+	var dir = "topimg/Inside Front.jpeg";
+	$window = $(window);
+	imgclick = function() {
+		dir = imgmap[dir]['click'];
+          image = $("#curimg");
+          image.fadeOut('fast', function () {
+            image.prop("src", dir);
+            image.fadeIn('fast');
+            });
+  	}
+  	$window.scroll(function() {
+  	   var st = $(this).scrollTop();
+   		if (st != oldtop){
+   			console.log('vert')
+
+   		} else {
+   			console.log('horiz')
+
+   			if ($window.scrollLeft() < 5) {
+   				console.log('left');
+   				dir = imgmap[dir]['left']
+          // $('#explanation').hide();
+          image = $("#curimg");
+          image.fadeOut('fast', function () {
+            image.prop("src", dir);
+            image.fadeIn('fast');
+          });
+   				right();
+   			} else if ($window.scrollLeft() + $window.width() >= $("#curimg").width() - 5) {
+   				console.log('right');
+   				dir = imgmap[dir]['right']
+          // $('#explanation').hide();
+
+          image = $("#curimg");
+          image.fadeOut('fast', function () {
+            image.prop("src", dir);
+            image.fadeIn('fast');
+          });
+   				left();
+   			}
+   		}
+   		oldtop = st;
+  	});
+
+  	imgmap = {
+  		"topimg/Inside Front.jpeg": {
+  			"left": "topimg/Inside Left.jpeg",
+  			"right":"topimg/Inside Right.jpeg",
+  			'click':'topimg/Outside Front.jpeg'
+  		},
+   		"topimg/Inside Left.jpeg": {
+  			"left":"topimg/Inside Back.jpeg",
+  			"right": "topimg/Inside Front.jpeg",
+  		  	'click':'topimg/Outside Left.jpeg'
+  		},
+  		 "topimg/Inside Back.jpeg": {
+  			"left":"topimg/Inside Right.jpeg",
+  			"right": "topimg/Inside Left.jpeg",
+  		  	'click':'topimg/Outside Back.jpeg'
+  		},		
+  		"topimg/Inside Right.jpeg": {
+  			"left": "topimg/Inside Front.jpeg",
+  			"right": "topimg/Inside Back.jpeg",
+   		  	'click':'topimg/Outside Right.jpeg'
+  		},
+  		"topimg/Outside Front.jpeg": {
+  			"left": "topimg/Outside Left.jpeg",
+  			"right":"topimg/Outside Right.jpeg",
+  			'click':'topimg/Inside Front.jpeg'
+  		},
+   		"topimg/Outside Left.jpeg": {
+  			"left":"topimg/Outside Back.jpeg",
+  			"right": "topimg/Outside Front.jpeg",
+  		  	'click':'topimg/Inside Left.jpeg'
+  		},
+  		 "topimg/Outside Back.jpeg": {
+  			"left":"topimg/Outside Right.jpeg",
+  			"right": "topimg/Outside Left.jpeg",
+  		  	'click':'topimg/Inside Back.jpeg'
+  		},		
+  		"topimg/Outside Right.jpeg": {
+  			"left": "topimg/Outside Front.jpeg",
+  			"right": "topimg/Outside Back.jpeg",
+   		  	'click':'topimg/Inside Right.jpeg'
+  		},
+  	}
+
+  	left = function() {
+  		$window.scrollLeft(10);
+  	}
+  	right = function() {
+  		$window.scrollLeft(($("#curimg").width() - $window.width() - 10));
+  	}
+  	center = function() {
+	  $window.scrollTop(($("#curimg").height() - $window.height()) / 2);
+	  $window.scrollLeft(($("#curimg").width() - $window.width()) / 2);
+  	}
+  	center();
+
+
+    onthehourinit = true;
+   function onTheHour() {
+       var d = new Date(),
+       h = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours() + 1, 0, 0, 0),
+       e = h - d;
+       window.setTimeout(onTheHour, e);
+
+       if (onthehourinit) {
+        onthehourinit = false;
+       } else {
+       //code to be run
+       var hours = d.getHours() % 12;
+       if (hours == 0) { hours = 12;}
+       while (hours > 0) {
+        window.setTimeout(play, 4000*hours);
+        hours -=1;
+       }
+     }
+    }
+    onTheHour(); 
+</script>
+  <audio style="display:none" id="audio1" src="0.7bell2.mp3" type="audio/mpeg"></audio>
+  <script>
+  function play() {
+    var audio = document.getElementById('audio1');
+    if (audio.paused) {
+        audio.play();
+    }else{
+        audio.currentTime = 0
+    }
+}
+  </script>
+</html>

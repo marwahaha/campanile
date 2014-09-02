@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="bootstrap.min.css">
+</head>
+<style>
+body  {
+    background: url('mainpage.jpeg') no-repeat center center fixed;
+    background-color: #cccccc;
+    background-size: cover;
+
+}
+</style>
+<body>
+<div style="margin-left:50%; margin-right:5%">
+<h1 style="font-weight:900; margin-top:20%">Brick by Brick</h1>
+<h3 style="font-weight:500">A Tribute to the Campanile</h3>
+<br>
+<p>This icon was completed in 1914 and has been a fixture of the Berkeley campus ever since.</p>
+<p>This site is dedicated to the Campanile's 100th year as a symbol of the university and town. Climb the side of the tower - read and contribute memories held within its bricks.</p>
+<br>
+</div>
+
+  <button onclick="window.location.href = 'scroll.php';" style="position:fixed; width:20%; height:10%; margin-left:50%; margin-top:1%; font-size:30px" class="btn btn-lg btn-success">start</button>
+<script>
+    onthehourinit = true;
+   function onTheHour() {
+       var d = new Date(),
+       h = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours() + 1, 0, 0, 0),
+       e = h - d;
+       window.setTimeout(onTheHour, e);
+
+       if (onthehourinit) {
+        onthehourinit = false;
+       } else {
+       //code to be run
+       var hours = d.getHours() % 12;
+       if (hours == 0) { hours = 12;}
+       while (hours > 0) {
+        window.setTimeout(play, 4000*hours);
+        hours -=1;
+       }
+     }
+    }
+    onTheHour(); 
+    </script>
+      <audio style="display:none" id="audio1" src="0.7bell2.mp3" type="audio/mpeg"></audio>
+  <script>
+  function play() {
+    var audio = document.getElementById('audio1');
+    if (audio.paused) {
+        audio.play();
+    }else{
+        audio.currentTime = 0
+    }
+}
+  </script>
+   <div class='' style="font-size:10px; text-align:center; position:fixed; width:20%; height:10%; margin-left:50%; margin-top:10%">
+  <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Brick by brick: A Tribute to the Campanile</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Kunal Marwaha, Arun Jandaur, Kate Rakelly, and Kevin Chen</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a><br>
+Audio sample obtained from Sather Tower Class of 1928 Carillon (complete bell samples). See <a href="http://hackthebells.org/open">http://hackthebells.org/open</a> for audio. Recorded by David Wessel, Ed Campion, and Jeff Davis. Licensed under Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)</div>
+</body>
+</html>
