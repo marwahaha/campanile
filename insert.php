@@ -16,7 +16,7 @@
 
    $id = htmlspecialchars($_POST['id'], ENT_QUOTES);
    $name = htmlspecialchars($_POST['name'], ENT_QUOTES);
-   $message = htmlspecialchars(nl2br($_POST['message']), ENT_QUOTES);
+   $message = htmlspecialchars($_POST['message'], ENT_QUOTES);
    $sql ="INSERT INTO BRICKS (ID,NAME,MESSAGE) VALUES ('$id', '$name', '$message')";
 
    $ret = $db->exec($sql);

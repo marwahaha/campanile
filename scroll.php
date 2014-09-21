@@ -37,6 +37,9 @@ td.full {
 td.window {
          cursor: auto;
 }
+#viewmessage {
+  white-space:pre-wrap;
+}
 </style>
 
 
@@ -136,7 +139,7 @@ td.window {
 <?php 
 
 
-for ($x=3; $x>=0; $x--) {
+for ($x=7; $x>=0; $x--) {
   $id2 = $x * 3 + 2;
   $id1 = $x * 3 + 1;
   $id0 = $x * 3 + 0;
@@ -145,23 +148,23 @@ echo <<<"FOOBAR"
   <tr style="">
     <td data-id="w.$id2.0"style="width:20%;"><span style="visibility:hidden">.</span></td>
     <td data-id="w.$id2.1"style="width:20%;"><span style="visibility:hidden">.</span></td>
-    <td data-id=""class="window" style="width:20%;"><span style="visibility:hidden">.</span></td>
+    <td data-id="w.$id2.2"class="window" style="width:20%;"><span style="visibility:hidden">.</span></td>
     <td data-id="w.$id2.3"style="width:20%;"><span style="visibility:hidden">.</span></td>
     <td data-id="w.$id2.4"style="width:20%;"><span style="visibility:hidden">.</span></td>
   </tr>
   <tr style="">
     <td data-id="w.$id1.0"style="width:20%;"><span style="visibility:hidden">.</span></td>
     <td data-id="w.$id1.1"style="width:20%;"><span style="visibility:hidden">.</span></td>
-    <td data-id=""class="window" style="width:20%;"><span style="visibility:hidden">.</span></td>
+    <td data-id="w.$id1.2"class="window" style="width:20%;"><span style="visibility:hidden">.</span></td>
     <td data-id="w.$id1.3"style="width:20%;"><span style="visibility:hidden">.</span></td>
     <td data-id="w.$id1.4"style="width:20%;"><span style="visibility:hidden">.</span></td>
   </tr>
   <tr style="">
-    <td data-id="w.$wid1.0"style="width:20%;"><span style="visibility:hidden">.</span></td>
-    <td data-id="w.$wid1.1"style="width:20%;"><span style="visibility:hidden">.</span></td>
-    <td data-id=""class="window" style="width:20%;"><span style="visibility:hidden">.</span></td>
-    <td data-id="w.$wid1.3"style="width:20%;"><span style="visibility:hidden">.</span></td>
-    <td data-id="w.$wid1.4"style="width:20%;"><span style="visibility:hidden">.</span></td>
+    <td data-id="w.$id0.0"style="width:20%;"><span style="visibility:hidden">.</span></td>
+    <td data-id="w.$id0.1"style="width:20%;"><span style="visibility:hidden">.</span></td>
+    <td data-id="w.$id0.2"class="window" style="width:20%;"><span style="visibility:hidden">.</span></td>
+    <td data-id="w.$id0.3"style="width:20%;"><span style="visibility:hidden">.</span></td>
+    <td data-id="w.$id0.4"style="width:20%;"><span style="visibility:hidden">.</span></td>
   </tr>
 </table>
 <img width="100%" src="window2.jpg"/>
@@ -346,8 +349,8 @@ EOF;
     $("#viewModal").modal();
     $('body').css('padding-right', 0);
     $brickdata = $(this).find('input');
-    $("#viewname").html($brickdata.data('name'));
-    $("#viewmessage").html($brickdata.data('message'));
+    $("#viewname").text($brickdata.data('name'));
+    $("#viewmessage").text($brickdata.data('message').replace(/[<]br [//][>]/g,''));
 
   });
   $('td').not('.full').not('.window').click(function() {
